@@ -19,6 +19,13 @@ Build: `$ ./make`
 
 Run as daemon (detach from terminal): `./dwm-status -d`
 
+## Patches
+
+Ok, may be it use some suckless things, like patches.
+
+Create PR with label `patch`, to apply it use `.diff` links.
+(like `https://github.com/torvalds/linux/pull/684.diff`)
+
 ## Writing module
 
 Create new file in `s/m/0000-mymodule.c`. First 4
