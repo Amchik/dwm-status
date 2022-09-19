@@ -7,8 +7,8 @@
 #include <sys/wait.h>
 
 #include "h/smod.h"
+#include "h/config.h"
 
-#define SEPARATOR " • "
 #define IS_DEBUG  (progmode & 1) == 1
 #define IS_DAEMON (progmode & 2) == 2
 
@@ -50,8 +50,8 @@ int main(int argc, char **argv) {
              argv[0], argv[0], argv[0]);
       return 0;
     } else if (!strcmp(argv[i], "-v")) {
-      puts("dwm-status by ceheki! version 1.0.0\n"
-           "source: 09/11/22 (done)");
+      puts("dwm-status by ceheki! version 1.1.0\n"
+           "source: 09/11/22 (done), 09/19/22 (updated)");
       return 0;
     } else if (!strcmp(argv[i], "-d")) {
       progmode |= 2;

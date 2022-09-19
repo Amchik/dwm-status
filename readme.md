@@ -66,6 +66,6 @@ MODULE(mymodule /* CHANGE IT! */, init);
 ## To-Do
 
 * [ ] Man Page
-* [ ] `s/h/config.h` with some consts like SEPARATOR
+* [x] `s/h/config.h` with some consts like SEPARATOR
 
 

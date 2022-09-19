@@ -3,6 +3,7 @@
 #include <time.h>
 
 #include "../h/smod.h"
+#include "../h/config.h"
 
 const char MONTHS[][4] = {
   [ 1] = "Jan",
@@ -23,8 +24,8 @@ static int get_status(char *str) {
   time_t _tm = time(0);
   struct tm tm = *localtime(&_tm);
 
-  sprintf(str, "%.2d %s %d",
-      tm.tm_mday, MONTHS[tm.tm_mon + 1], tm.tm_year + 1900);
+  sprintf(str, "%.2d %s %d%s%.2d:%.2d",
+      tm.tm_mday, MONTHS[tm.tm_mon + 1], tm.tm_year + 1900, SEPARATOR, tm.tm_hour, tm.tm_min);
 
   return 0;
 }
@@ -34,5 +35,5 @@ static void init(smod_config_t *cfg) {
   cfg->status_length = 60;
 }
 
-MODULE(dateonly, init);
+MODULE(datetime, init);
 
