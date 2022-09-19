@@ -1,29 +1,30 @@
-=== DWM STATUS ===
+# `dwm-status`
+
 Not suckless way, but suckless way sucks.
 
-Building:
- $ vi mk.conf
- $ ./make
-Building via make:
- $ alias make=./make
- or
- $ echo -e '.PHONY: all\nall:\n    @./make' > makefile
- $ make
+## Building & Usage
 
-$ ./dwm-status -h
-Usage: ./dwm-status -h|-v
-       ./dwm-status -g
-       ./dwm-status
+See `mk.conf` for build options.
 
-  -g   Debug mode. Do not run xsetroot and print result to stdout.
-  -d   Run as daemon.
-  -h   Shows help message (this message) and exit.
-  -v   Shows dwm-status version and exit.
+Build: `$ ./make`
 
-To-Do: man page, readme
+    Usage: ./dwm-status -h|-v
+           ./dwm-status -g
+           ./dwm-status
 
-Write module:
- $ vi s/m/0500-my-module.c
+      -g   Debug mode. Do not run xsetroot and print result to stdout.
+      -d   Run as daemon.
+      -h   Shows help message (this message) and exit.
+      -v   Shows dwm-status version and exit.
+
+Run as daemon (detach from terminal): `./dwm-status -d`
+
+## Writing module
+
+Create new file in `s/m/0000-mymodule.c`. First 4
+digits is a priority.
+
+```c
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -53,4 +54,11 @@ MODULE(mymodule /* CHANGE IT! */, init);
 /*
  * More (uncommented) examples in s/m/*.c
  */
+```
+
+## To-Do
+
+* [ ] Man Page
+* [ ] `s/h/config.h` with some consts like SEPARATOR
+
 
