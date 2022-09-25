@@ -23,6 +23,8 @@ Run as daemon (detach from terminal): `./dwm-status -d`
 
 Ok, may be it use some suckless things, like patches.
 
+List: https://github.com/Amchik/dwm-status/labels/patch
+
 Create PR with label `patch`, to apply it use `.diff` links.
 (like `https://github.com/torvalds/linux/pull/684.diff`)
 
