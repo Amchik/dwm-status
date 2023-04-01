@@ -4,6 +4,8 @@ Not suckless way, but suckless way sucks.
 
 > **ValgrindLLVM:** thats my own version of `dwm-status`. Anyway nobody
 > will use it, so thats latest version of `dwm-status`.
+>
+> Hardforked from [github.com/Amchik/dwm-status](https://github.com/Amchik/dwm-status)
 
 ## Building & Usage
 
