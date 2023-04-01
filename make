@@ -26,10 +26,10 @@ make() {
   $log $@
   case "$1" in
     cc)
-      $cc $cflags -c -o $3 $2
+      $cc $cflags $fcflags -c -o $3 $2
       ;;
     ld)
-      $cc -o $2 ${@:3} $ldflags
+      $cc -o $2 ${@:3} $ldflags $fldflags
       ;; 
   esac 
 }
@@ -46,6 +46,21 @@ case "$target" in
 esac
 
 $target || die "target failture: $target"
+
+fcflags=""
+fldflags=""
+for feature in $features; do
+    case $feature in
+        xorg)
+            fcflags="$fcflags -DXORG"
+            fldflags="$fldflags -lX11"
+            ;;
+        *)
+            die "Unknown feature: $feature"
+            ;;
+    esac
+done
+
 o=""
 for s in $(ls s/*.c s/*/*.c); do 
   r="$(echo $s | sed 's/s/o/' | sed 's/\(\.c\)$/.o/')"

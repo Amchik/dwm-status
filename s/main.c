@@ -9,6 +9,21 @@
 #include "h/smod.h"
 #include "h/config.h"
 
+#ifdef XORG
+#include <X11/Xlib.h>
+
+Display *X_DISPLAY;
+Window   X_WINDOW;
+static void init_xorg() {
+    X_DISPLAY = XOpenDisplay(0);
+    if (!X_DISPLAY) {
+        fprintf(stderr, "Failed to open display\n");
+        exit(1);
+    }
+    X_WINDOW  = XDefaultRootWindow(X_DISPLAY);
+}
+#endif
+
 #define IS_DEBUG  (progmode & 1) == 1
 #define IS_DAEMON (progmode & 2) == 2
 
@@ -26,13 +41,18 @@ typedef struct {
 void handle_sigint() {
   exit(0);
 }
+static void display_bar(const char *str);
 
 int main(int argc, char **argv) {
   size_t i, cnt, statusstr_len, statusstr_cur, modstr_len;
   smod_config_t mods[&__stop_dwmstatusmods - &__start_dwmstatusmods];
   char *statusstr;
   str_t status_strings[&__stop_dwmstatusmods - &__start_dwmstatusmods];
-  int res, pid, progmode;
+  int res, progmode;
+
+#ifdef XORG
+  init_xorg();
+#endif
 
   progmode = 0;
   for (i = 1; i < argc; i += 1) {
@@ -123,18 +143,7 @@ int main(int argc, char **argv) {
       printf("\033[A\033[G\033[2K");
       puts(statusstr);
     } else {
-      pid = fork();
-      if (pid < 0) {
-        /* handle error... */
-        perror("fork()");
-        return 127;
-      } else if (pid == 0) {
-        execl("/usr/bin/xsetroot", "xsetroot", "-name", statusstr, 0);
-        exit(127);
-      }
-      do {
-        waitpid(pid, &res, 0);
-      } while (!WIFEXITED(res));
+      display_bar(statusstr);
     }
 
     cnt += 1;
@@ -146,3 +155,27 @@ int main(int argc, char **argv) {
 
   return 0;
 }
+
+#ifdef XORG
+static void display_bar(const char *str) {
+  XStoreName(X_DISPLAY, X_WINDOW, str);
+  XFlush(X_DISPLAY);
+}
+#else
+static void display_bar(const char *str) {
+  int res, pid;
+
+  pid = fork();
+  if (pid < 0) {
+    /* handle error... */
+    perror("fork()");
+    exit(127);
+  } else if (pid == 0) {
+    execl("/usr/bin/xsetroot", "xsetroot", "-name", str, 0);
+    exit(127);
+  }
+  do {
+    waitpid(pid, &res, 0);
+  } while (!WIFEXITED(res));
+}
+#endif
