@@ -22,7 +22,7 @@ Build: `$ ./make`
            ./dwm-status -g
            ./dwm-status
 
-      -g   Debug mode. Do not run xsetroot and print result to stdout.
+      -g   Debug mode. Print result to stdout without setting it.
       -d   Run as daemon.
       -h   Shows help message (this message) and exit.
       -v   Shows dwm-status version and exit.

@@ -63,15 +63,15 @@ int main(int argc, char **argv) {
              "       %s -g\n"
              "       %s\n"
              "\n"
-             "  -g   Debug mode. Do not run xsetroot and print result to stdout.\n"
+             "  -g   Debug mode. Print result to stdout without setting it.\n"
              "  -d   Run as daemon.\n"
              "  -h   Shows help message (this message) and exit.\n"
              "  -v   Shows dwm-status version and exit.\n",
              argv[0], argv[0], argv[0]);
       return 0;
     } else if (!strcmp(argv[i], "-v")) {
-      puts("dwm-status by ceheki! version 1.1.0\n"
-           "source: 09/11/22 (done), 09/19/22 (updated)");
+      puts("dwm-status by ceheki! version 1.2.0\n"
+           "source: 09/11/22 (done), 09/19/22 (updated), 04/01/23 (libX11)");
       return 0;
     } else if (!strcmp(argv[i], "-d")) {
       progmode |= 2;
