@@ -11,7 +11,7 @@ static int get_status(char *str) {
   sysinfo(&memInfo);
   mem_free = (double)memInfo.freeram * memInfo.mem_unit / 1024 / 1024 / 1024;
 
-  sprintf(str, "%2.2fgb free", mem_free);
+  sprintf(str, "%2.2fgb mem", mem_free);
 
   return 0;
 }
