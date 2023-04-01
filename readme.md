@@ -2,9 +2,17 @@
 
 Not suckless way, but suckless way sucks.
 
+> **ValgrindLLVM:** thats my own version of `dwm-status`. Anyway nobody
+> will use it, so thats latest version of `dwm-status`.
+
 ## Building & Usage
 
 See `mk.conf` for build options.
+
+> **ValgrindLLVM:** `features="feat1 feat2"` in `mk.conf` list:
+> Feature name | Description
+> -------------|------------------------------------------------
+>    `xorg`    | Use `libX11` instead of `xsetroot(1)` command.
 
 Build: `$ ./make`
 
